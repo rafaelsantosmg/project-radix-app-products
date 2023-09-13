@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "name": "Smartphone XYZ",
+    "description": "Um smartphone de última geração",
+    "category": "Eletrônicos",
+    "price": 799.99
+  },
+  {
+    "id": 2,
+    "name": "Câmera Digital HD",
+    "description": "Uma câmera digital de alta definição",
+    "category": "Fotografia",
+    "price": 349.99
+  },
+  {
+    "id": 3,
+    "name": "Tênis de Corrida",
+    "description": "Tênis esportivo para corridas",
+    "category": "Esportes",
+    "price": 89.99
+  },
+  {
+    "id": 4,
+    "name": "Livro de Ficção Científica",
+    "description": "Um emocionante romance de ficção científica",
+    "category": "Livros",
+    "price": 19.99
+  },
+  {
+    "id": 5,
+    "name": "Mochila de Acampamento",
+    "description": "Uma mochila resistente para aventuras ao ar livre",
+    "category": "Acessórios",
+    "price": 59.99
+  },
+  {
+    "id": 6,
+    "name": "Fones de Ouvido Bluetooth",
+    "description": "Fones de ouvido sem fio de alta qualidade",
+    "category": "Eletrônicos",
+    "price": 129.99
+  },
+  {
+    "id": 7,
+    "name": "Bicicleta de Montanha",
+    "description": "Uma bicicleta robusta para trilhas",
+    "category": "Esportes",
+    "price": 399.99
+  },
+  {
+    "id": 8,
+    "name": "Relógio de Pulso Elegante",
+    "description": "Um relógio de pulso sofisticado",
+    "category": "Acessórios",
+    "price": 149.99
+  },
+  {
+    "id": 9,
+    "name": "Panela Antiaderente",
+    "description": "Uma panela de cozinha fácil de limpar",
+    "category": "Casa e Cozinha",
+    "price": 49.99
+  },
+  {
+    "id": 10,
+    "name": "Cadeira de Escritório Ergonômica",
+    "description": "Uma cadeira confortável para longas horas de trabalho",
+    "category": "Móveis",
+    "price": 199.99
+  },
+  {
+    "id": 11,
+    "name": "Chapéu de Sol",
+    "description": "Um chapéu para proteger do sol",
+    "category": "Acessórios",
+    "price": 14.99
+  },
+  {
+    "id": 12,
+    "name": "Máquina de Café Expresso",
+    "description": "Uma máquina para preparar café expresso",
+    "category": "Eletrodomésticos",
+    "price": 249.99
+  },
+  {
+    "id": 13,
+    "name": "Camiseta de Algodão",
+    "description": "Uma camiseta confortável",
+    "category": "Moda",
+    "price": 29.99
+  },
+  {
+    "id": 14,
+    "name": "Tênis de Basquete",
+    "description": "Tênis de alta performance para basquete",
+    "category": "Esportes",
+    "price": 119.99
+  },
+  {
+    "id": 15,
+    "name": "Câmera de Ação 4K",
+    "description": "Uma câmera compacta para aventuras radicais",
+    "category": "Fotografia",
+    "price": 179.99
+  },
+  {
+    "id": 16,
+    "name": "Colar de Prata",
+    "description": "Um colar elegante feito de prata",
+    "category": "Jóias",
+    "price": 69.99
+  },
+  {
+    "id": 17,
+    "name": "Saco de Dormir",
+    "description": "Um saco de dormir quente para camping",
+    "category": "Acessórios",
+    "price": 79.99
+  },
+  {
+    "id": 18,
+    "name": "Console de Jogos",
+    "description": "Um console de última geração para gamers",
+    "category": "Eletrônicos",
+    "price": 499.99
+  },
+  {
+    "id": 19,
+    "name": "Blusa de Lã",
+    "description": "Uma blusa de lã para os dias frios",
+    "category": "Moda",
+    "price": 39.99
+  },
+  {
+    "id": 20,
+    "name": "Mala de Viagem",
+    "description": "Uma mala resistente para suas viagens",
+    "category": "Acessórios",
+    "price": 89.99
+  }
+]
