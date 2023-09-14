@@ -1,34 +1,32 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# FrontEnd RADIX
 
-## Getting Started
+FrontEnd desenvolvido com NextJS, Appolo Client e MaterialUI
 
-First, run the development server:
+## Descrição do projeto
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+O projeto consiste em exibir uma lista de produtos que vem atravéz de uma api
+GraphQl e renderizen na tela uma tabela com as seguintes informações:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- ID
+- Nome
+- Descrição
+- Categoria
+- Preço
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+O mesmo ainda disponibiliza de um sistema de ordenação por colunas.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Também será possivel filtar os produtos por:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- Nome
+- Categoria
+- Preço
 
-## Learn More
+## Desafios e Aprendizados.
 
-To learn more about Next.js, take a look at the following resources:
+O desafio do projeto foi preparar um setup em NextJs onde eu não estava familiazirado
+com o Framework e tive dificuldade em fazer toda configuração do setup.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Aprendizado foi evoluir minhas capacidade técnica e ter a oportunidade de por em pratica
+a escrita de códigos em TypeScript.
+Também pude aprender de uma maneira genérica como conectar meu front ao back usando
+as tecnologias do Appolo Cliente e GraphQl.

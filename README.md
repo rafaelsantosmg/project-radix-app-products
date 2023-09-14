@@ -1,5 +1,5 @@
 
-# Projeto Radix
+# Projeto RADIX
 
  - A lista de produtos deve ser exibida em uma tabela com as seguintes informações: nome, preço e categoria.
  - Deve ser possível filtrar os produtos por categoria utilizando um seletor de categorias.
@@ -7,7 +7,6 @@
  - A aplicação deve ser escrita em TypeScript.
 
 O objetivo é disponibilizar um front-end onde seja possivel listar e fazer filtragem de produtos.
-## Demo
 
 ## Stack utilizada
 
@@ -15,8 +14,38 @@ O objetivo é disponibilizar um front-end onde seja possivel listar e fazer filt
 
 **Back-end:** Graphql.
 
-
-## Aprendizados
-
 ## Rodando localmente
 
+Clone o projeto
+
+```bash
+  git clone git@github.com:rafaelsantosmg/project-radix-app-products.git
+```
+
+Entre no diretório do projeto
+
+```bash
+  cd project-radix-app-products
+```
+
+Instale as dependências do projeto. esse script instala as dependências do backend e frontend
+
+```bash
+  yarn run install:apps
+```
+
+Para roda o FontEnd e O BackEnd siga os próximos passos
+
+ - frontend
+```bash
+  cd app/frontend
+  yarn dev
+```
+
+ - backend
+ ```bash
+  cd app/backend
+  yarn run dev
+ ```
+
+Após esses comando acesse [localhost](http://localhost:3000/)
