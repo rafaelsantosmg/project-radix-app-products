@@ -4,6 +4,7 @@
 # -----------------------------------------------
 
 type Product {
+  category: String!
   description: String!
   id: ID!
   name: String!
