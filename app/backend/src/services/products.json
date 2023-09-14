@@ -138,5 +138,215 @@
     "description": "Uma mala resistente para suas viagens",
     "category": "Acessórios",
     "price": 89.99
+  },
+  {
+    "id": 21,
+    "name": "Tablet de Última Geração",
+    "description": "Um tablet poderoso com tela de alta resolução",
+    "category": "Eletrônicos",
+    "price": 499.99
+  },
+  {
+    "id": 22,
+    "name": "Sapatos de Corrida",
+    "description": "Sapatos leves para atletas",
+    "category": "Esportes",
+    "price": 119.99
+  },
+  {
+    "id": 23,
+    "name": "Cadeira de Praia",
+    "description": "Uma cadeira reclinável para relaxar na praia",
+    "category": "Acessórios",
+    "price": 39.99
+  },
+  {
+    "id": 24,
+    "name": "Livro de Mistério",
+    "description": "Um livro cheio de enigmas e suspense",
+    "category": "Livros",
+    "price": 24.99
+  },
+  {
+    "id": 25,
+    "name": "Liquidificador Potente",
+    "description": "Um liquidificador para fazer smoothies deliciosos",
+    "category": "Eletrodomésticos",
+    "price": 79.99
+  },
+  {
+    "id": 26,
+    "name": "Jaqueta de Inverno",
+    "description": "Uma jaqueta quente para enfrentar o frio",
+    "category": "Moda",
+    "price": 99.99
+  },
+  {
+    "id": 27,
+    "name": "Mala de Acampamento Grande",
+    "description": "Uma mala espaçosa para todas as suas aventuras ao ar livre",
+    "category": "Acessórios",
+    "price": 129.99
+  },
+  {
+    "id": 28,
+    "name": "Guitarra Elétrica",
+    "description": "Uma guitarra para os amantes da música",
+    "category": "Instrumentos Musicais",
+    "price": 299.99
+  },
+  {
+    "id": 29,
+    "name": "Câmera DSLR Profissional",
+    "description": "Uma câmera DSLR de alta qualidade para fotógrafos",
+    "category": "Fotografia",
+    "price": 899.99
+  },
+  {
+    "id": 30,
+    "name": "Relógio Inteligente",
+    "description": "Um relógio com recursos inteligentes",
+    "category": "Acessórios",
+    "price": 199.99
+  },
+  {
+    "id": 31,
+    "name": "Mesa de Jantar",
+    "description": "Uma mesa elegante para suas refeições",
+    "category": "Móveis",
+    "price": 349.99
+  },
+  {
+    "id": 32,
+    "name": "Aspirador de Pó Robô",
+    "description": "Um aspirador de pó automático para manter sua casa limpa",
+    "category": "Eletrodomésticos",
+    "price": 299.99
+  },
+  {
+    "id": 33,
+    "name": "Pulseira de Ouro",
+    "description": "Uma pulseira luxuosa feita de ouro",
+    "category": "Jóias",
+    "price": 499.99
+  },
+  {
+    "id": 34,
+    "name": "Bicicleta de Estrada",
+    "description": "Uma bicicleta veloz para pedaladas longas",
+    "category": "Esportes",
+    "price": 599.99
+  },
+  {
+    "id": 35,
+    "name": "Blender de Alta Velocidade",
+    "description": "Um liquidificador de alta velocidade para sucos e smoothies",
+    "category": "Eletrodomésticos",
+    "price": 129.99
+  },
+  {
+    "id": 36,
+    "name": "Vestido de Noite Elegante",
+    "description": "Um vestido luxuoso para ocasiões especiais",
+    "category": "Moda",
+    "price": 199.99
+  },
+  {
+    "id": 37,
+    "name": "Bolsa de Designer",
+    "description": "Uma bolsa de designer de moda",
+    "category": "Moda",
+    "price": 349.99
+  },
+  {
+    "id": 38,
+    "name": "Caixa de Som Bluetooth",
+    "description": "Uma caixa de som portátil com tecnologia Bluetooth",
+    "category": "Eletrônicos",
+    "price": 79.99
+  },
+  {
+    "id": 39,
+    "name": "Skate Elétrico",
+    "description": "Um skate motorizado para diversão urbana",
+    "category": "Esportes",
+    "price": 249.99
+  },
+  {
+    "id": 40,
+    "name": "Perfume de Luxo",
+    "description": "Um perfume exclusivo para ocasiões especiais",
+    "category": "Acessórios",
+    "price": 129.99
+  },
+  {
+    "id": 41,
+    "name": "Máquina de Lavar Roupa",
+    "description": "Uma máquina de lavar roupa eficiente",
+    "category": "Eletrodomésticos",
+    "price": 399.99
+  },
+  {
+    "id": 42,
+    "name": "Bolsa de Laptop",
+    "description": "Uma bolsa de laptop elegante e funcional",
+    "category": "Acessórios",
+    "price": 59.99
+  },
+  {
+    "id": 43,
+    "name": "Teclado Mecânico",
+    "description": "Um teclado mecânico de alta qualidade para gamers",
+    "category": "Eletrônicos",
+    "price": 149.99
+  },
+  {
+    "id": 44,
+    "name": "Escova de Dentes Elétrica",
+    "description": "Uma escova de dentes elétrica para uma limpeza eficaz",
+    "category": "Casa e Cozinha",
+    "price": 29.99
+  },
+  {
+    "id": 45,
+    "name": "Bicicleta de Cidade",
+    "description": "Uma bicicleta urbana para deslocamentos diários",
+    "category": "Esportes",
+    "price": 249.99
+  },
+  {
+    "id": 46,
+    "name": "Cama King Size",
+    "description": "Uma cama espaçosa para noites de sono confortáveis",
+    "category": "Móveis",
+    "price": 799.99
+  },
+  {
+    "id": 47,
+    "name": "Óculos de Sol",
+    "description": "Óculos de sol elegantes e estilosos",
+    "category": "Acessórios",
+    "price": 69.99
+  },
+  {
+    "id": 48,
+    "name": "Relógio de Parede",
+    "description": "Um relógio de parede decorativo",
+    "category": "Decoração",
+    "price": 49.99
+  },
+  {
+    "id": 49,
+    "name": "Laptop de Alta Performance",
+    "description": "Um laptop poderoso para tarefas exigentes",
+    "category": "Eletrônicos",
+    "price": 999.99
+  },
+  {
+    "id": 50,
+    "name": "Sofá de Couro",
+    "description": "Um sofá de couro elegante para sua sala de estar",
+    "category": "Móveis",
+    "price": 699.99
   }
 ]
