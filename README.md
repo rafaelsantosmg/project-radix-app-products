@@ -34,7 +34,10 @@ Instale as dependências do projeto. esse script instala as dependências do bac
   yarn run install:apps
 ```
 
-Para roda o FontEnd e O BackEnd siga os próximos passos
+Para roda o FontEnd e O BackEnd siga os próximos passos!
+
+Certifique de estar na pasta raiz do projeto antes de executar os comandos
+e abra um terminal para cada seção.
 
  - frontend
 ```bash
