@@ -12,13 +12,18 @@ function Header() {
         height: '4rem',
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
       <Grid
         container
         justifyContent="space-between"
         alignItems="center"
-        sx={{ padding: '0 1.5rem' }}
+        xl={10}
+        lg={8}
+        md={8}
+        sm={8}
+        xs={10}
       >
         <Image
           src={background}
