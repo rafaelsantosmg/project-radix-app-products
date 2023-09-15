@@ -1,3 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useQuery } from '@apollo/client'
+import { Button, Grid } from '@mui/material'
 import Box from '@mui/material/Box'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Paper from '@mui/material/Paper'
@@ -12,6 +15,7 @@ import TableRow from '@mui/material/TableRow'
 import TableSortLabel from '@mui/material/TableSortLabel'
 import Typography from '@mui/material/Typography'
 import { visuallyHidden } from '@mui/utils'
+import { useRouter } from 'next/navigation'
 import {
   ChangeEvent,
   MouseEvent,
@@ -20,7 +24,7 @@ import {
   useMemo,
   useState,
 } from 'react'
-import useGetProducts from '../../hooks/useGetProducts'
+import { GET_PRODUCTS } from '../../graphql/productQuery'
 import { Product } from '../../interfaces/Products'
 import { EnhancedTableProps, HeadCell } from '../../interfaces/Table'
 import { DataContext } from '../../providers/DataProvider'
@@ -143,6 +147,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 }
 
 export default function SortTable() {
+  const router = useRouter()
   const { setProducts, searchProducts, setSearchProducts } =
     useContext(DataContext)
   const [order, setOrder] = useState<Order>('asc')
@@ -151,14 +156,14 @@ export default function SortTable() {
   const [dense, setDense] = useState(false)
   const [rowsPerPage, setRowsPerPage] = useState(5)
 
-  const { products, loading } = useGetProducts()
+  const { data, loading } = useQuery<{ products: Product[] }>(GET_PRODUCTS)
 
   useEffect(() => {
-    if (products) {
-      setProducts(products)
-      setSearchProducts(products)
+    if (data) {
+      setProducts(data.products)
+      setSearchProducts(data.products)
     }
-  }, [products, setProducts, setSearchProducts])
+  }, [data])
 
   const rows = searchProducts.map((product: Product) =>
     createData(
@@ -284,11 +289,24 @@ export default function SortTable() {
           onRowsPerPageChange={handleChangeRowsPerPage}
           labelRowsPerPage="Linhas por página:"
         />
-        <FormControlLabel
-          sx={{ ml: 1 }}
-          control={<Switch checked={dense} onChange={handleChangeDense} />}
-          label="Desativar espaçamento"
-        />
+        <Grid container justifyContent="space-between">
+          <Grid item sx={{ m: 2 }}>
+            <FormControlLabel
+              control={<Switch checked={dense} onChange={handleChangeDense} />}
+              label="Desativar espaçamento"
+            />
+          </Grid>
+          <Grid item sx={{ m: 2 }}>
+            <Button
+              variant="contained"
+              color="success"
+              sx={{ mr: 2 }}
+              onClick={() => router.push('/addproducts')}
+            >
+              Cadastrar novo produto
+            </Button>
+          </Grid>
+        </Grid>
       </Paper>
     </Box>
   )
