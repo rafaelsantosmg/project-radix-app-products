@@ -4,7 +4,7 @@ const theme = {
   purple: `#6400E9`,
   white: `#FFF`,
   black: `#000`,
-  gray: `#F5F5F5`,
+  gray: `#757575`,
   red: `#FF0000`,
 }
 
