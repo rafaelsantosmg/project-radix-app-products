@@ -19,8 +19,6 @@ export default function SearchBar() {
     }, [])
     .sort((a: string, b: string) => a.localeCompare(b))
 
-  categories.push('Todas as categorias')
-
   const handleSelectCategory = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const category = target.value
     const filteredProducts = products.filter(
@@ -28,7 +26,7 @@ export default function SearchBar() {
     )
     setSelectedCategory(category)
 
-    if (category === 'Todas as categorias') {
+    if (category === '') {
       setSearchProducts(products)
     } else setSearchProducts(filteredProducts)
   }
@@ -58,33 +56,46 @@ export default function SearchBar() {
         flexDirection: 'column',
         gridArea: 'search',
         justifyContent: 'flex-start',
+        mt: 2,
+        mb: 2,
         width: '100%',
       }}
     >
-      <Box
-        sx={{
-          background: theme.gray,
-          display: 'flex',
-          width: '90%',
-        }}
+      <Grid
+        container
+        justifyContent="space-between"
+        alignItems="center"
+        xl={10}
+        lg={8}
+        md={8}
+        sm={8}
+        xs={10}
       >
-        <Grid container spacing={2} justifyContent="space-between">
-          <Grid item lg={8} md={6} sm={12} xs={12}>
-            <TextFields
-              label="Busque um produto"
-              onChange={handleChangeTextFields}
-            />
+        <Box
+          sx={{
+            background: theme.white,
+            display: 'flex',
+            width: '100%',
+          }}
+        >
+          <Grid container spacing={2} justifyContent="space-between">
+            <Grid item lg={8} md={6} sm={12} xs={12}>
+              <TextFields
+                label="Busque um produto"
+                onChange={handleChangeTextFields}
+              />
+            </Grid>
+            <Grid item lg={4} md={6} sm={12} xs={12}>
+              <SelectTextFields
+                label="Selecione uma categoria"
+                data={categories}
+                value={selectedCategory}
+                onChange={handleSelectCategory}
+              />
+            </Grid>
           </Grid>
-          <Grid item lg={4} md={6} sm={12} xs={12}>
-            <SelectTextFields
-              label="Selecione uma categoria"
-              data={categories}
-              value={selectedCategory}
-              onChange={handleSelectCategory}
-            />
-          </Grid>
-        </Grid>
-      </Box>
+        </Box>
+      </Grid>
     </Box>
   )
 }
