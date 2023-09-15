@@ -3,6 +3,10 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+type Mutation {
+  createProduct(category: String!, description: String!, id: String!, name: String!, price: Float!): Product!
+}
+
 type Product {
   category: String!
   description: String!
