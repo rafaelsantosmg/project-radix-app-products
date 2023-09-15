@@ -17,7 +17,7 @@ export async function loadDataFromFile() {
   }
 }
 
-export async function saveDataToFile(data: Product) {
+export async function saveDataToFile(data: Product[]) {
   try {
     const jsonData = JSON.stringify(data, null, 2)
     await fs.writeFile(filePath, jsonData, 'utf-8')
