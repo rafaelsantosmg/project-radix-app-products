@@ -10,6 +10,7 @@ import TextFields from '../Inputs/TextFields'
 const style = {
   p: {
     color: theme.red,
+    ml: 1,
   },
 }
 
@@ -144,7 +145,7 @@ export default function Form() {
     >
       <Grid container xl={8} lg={10} md={8} sm={8} xs={10} spacing={2}>
         <Grid item xs={12}>
-          <Typography variant="h3">Cadastro de Produtos</Typography>
+          <Typography variant="h4">Cadastro de Produtos</Typography>
         </Grid>
         <Grid item xs={12}>
           <TextFields
