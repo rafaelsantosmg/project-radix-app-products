@@ -53,33 +53,38 @@ export default function SearchBar() {
   return (
     <Box
       sx={{
-        background: theme.gray,
+        alignItems: 'center',
         display: 'flex',
+        flexDirection: 'column',
         gridArea: 'search',
+        justifyContent: 'flex-start',
         width: '100%',
       }}
     >
-      <Grid
-        container
-        spacing={2}
-        justifyContent="space-between"
-        style={{ width: '90%' }}
+      <Box
+        sx={{
+          background: theme.gray,
+          display: 'flex',
+          width: '90%',
+        }}
       >
-        <Grid item lg={8} md={6} sm={12} xs={12}>
-          <TextFields
-            label="Busque um produto"
-            onChange={handleChangeTextFields}
-          />
+        <Grid container spacing={2} justifyContent="space-between">
+          <Grid item lg={8} md={6} sm={12} xs={12}>
+            <TextFields
+              label="Busque um produto"
+              onChange={handleChangeTextFields}
+            />
+          </Grid>
+          <Grid item lg={4} md={6} sm={12} xs={12}>
+            <SelectTextFields
+              label="Selecione uma categoria"
+              data={categories}
+              value={selectedCategory}
+              onChange={handleSelectCategory}
+            />
+          </Grid>
         </Grid>
-        <Grid item lg={4} md={6} sm={12} xs={12}>
-          <SelectTextFields
-            label="Selecione uma categoria"
-            data={categories}
-            value={selectedCategory}
-            onChange={handleSelectCategory}
-          />
-        </Grid>
-      </Grid>
+      </Box>
     </Box>
   )
 }
