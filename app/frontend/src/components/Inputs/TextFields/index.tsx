@@ -7,7 +7,7 @@ export default function TextFields({ ...props }) {
       <TextField
         id="filled-search"
         type="search"
-        variant="filled"
+        variant="outlined"
         fullWidth
         {...props}
       />
