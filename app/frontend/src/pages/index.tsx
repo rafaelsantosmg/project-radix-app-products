@@ -1,8 +1,8 @@
-import SortTable from '../src/components/Table'
 import { Box } from '@mui/material'
-import Header from '../src/components/Header'
+import Header from '../components/Header'
+import SearchBar from '../components/SearchBar'
+import SortTable from '../components/Table'
 import { styleHome } from '../styles/style-home'
-import SearchBar from '../src/components/SearchBar'
 
 export default function Home() {
   return (

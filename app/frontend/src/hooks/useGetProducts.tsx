@@ -1,6 +1,6 @@
 import { Product } from '@/interfaces/Products'
 import { useQuery } from '@apollo/client'
-import { GET_PRODUCTS } from '../../graphql/productQuery'
+import { GET_PRODUCTS } from '../graphql/productQuery'
 
 function useGetProducts(): {
   products: Product[]
