@@ -12,11 +12,19 @@ import TableRow from '@mui/material/TableRow'
 import TableSortLabel from '@mui/material/TableSortLabel'
 import Typography from '@mui/material/Typography'
 import { visuallyHidden } from '@mui/utils'
-import * as React from 'react'
-import { Order } from '../../Types'
+import {
+  ChangeEvent,
+  MouseEvent,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 import useGetProducts from '../../hooks/useGetProducts'
 import { Product } from '../../interfaces/Products'
 import { EnhancedTableProps, HeadCell } from '../../interfaces/Table'
+import { DataContext } from '../../providers/DataProvider'
+import { Order } from '../../types'
 
 function createData(
   id: number,
@@ -101,7 +109,7 @@ const headCells: readonly HeadCell[] = [
 function EnhancedTableHead(props: EnhancedTableProps) {
   const { order, orderBy, onRequestSort } = props
   const createSortHandler =
-    (property: keyof Product) => (event: React.MouseEvent<unknown>) => {
+    (property: keyof Product) => (event: MouseEvent<unknown>) => {
       onRequestSort(event, property)
     }
 
@@ -135,16 +143,24 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 }
 
 export default function SortTable() {
-  const [order, setOrder] = React.useState<Order>('asc')
-  const [orderBy, setOrderBy] = React.useState<keyof Product>('category')
-  const [selected, setSelected] = React.useState<readonly string[]>([])
-  const [page, setPage] = React.useState(0)
-  const [dense, setDense] = React.useState(false)
-  const [rowsPerPage, setRowsPerPage] = React.useState(5)
+  const { setProducts, searchProducts, setSearchProducts } =
+    useContext(DataContext)
+  const [order, setOrder] = useState<Order>('asc')
+  const [orderBy, setOrderBy] = useState<keyof Product>('category')
+  const [page, setPage] = useState(0)
+  const [dense, setDense] = useState(false)
+  const [rowsPerPage, setRowsPerPage] = useState(5)
 
   const { products, loading } = useGetProducts()
 
-  const rows = products.map((product: Product) =>
+  useEffect(() => {
+    if (products) {
+      setProducts(products)
+      setSearchProducts(products)
+    }
+  }, [products, setProducts, setSearchProducts])
+
+  const rows = searchProducts.map((product: Product) =>
     createData(
       product.id,
       product.name,
@@ -154,7 +170,7 @@ export default function SortTable() {
     )
   )
 
-  const visibleRows = React.useMemo(
+  const visibleRows = useMemo(
     () =>
       stableSort(rows, getComparator(order, orderBy)).slice(
         page * rowsPerPage,
@@ -164,7 +180,7 @@ export default function SortTable() {
   )
 
   const handleRequestSort = (
-    _event: React.MouseEvent<unknown>,
+    _event: MouseEvent<unknown>,
     property: keyof Product
   ) => {
     const isAsc = orderBy === property && order === 'asc'
@@ -172,51 +188,18 @@ export default function SortTable() {
     setOrderBy(property)
   }
 
-  const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.checked) {
-      const newSelected = rows.map((n) => n.name)
-      setSelected(newSelected)
-      return
-    }
-    setSelected([])
-  }
-
-  const handleClick = (_event: React.MouseEvent<unknown>, name: string) => {
-    const selectedIndex = selected.indexOf(name)
-    let newSelected: readonly string[] = []
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name)
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1))
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1))
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      )
-    }
-
-    setSelected(newSelected)
-  }
-
   const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage)
   }
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(parseInt(event.target.value, 10))
     setPage(0)
   }
 
-  const handleChangeDense = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeDense = (event: ChangeEvent<HTMLInputElement>) => {
     setDense(event.target.checked)
   }
-
-  const isSelected = (name: string) => selected.indexOf(name) !== -1
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0
@@ -242,27 +225,20 @@ export default function SortTable() {
             size={dense ? 'small' : 'medium'}
           >
             <EnhancedTableHead
-              numSelected={selected.length}
               order={order}
               orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
             />
             <TableBody>
               {visibleRows.map((row, index) => {
-                const isItemSelected = isSelected(row.name)
                 const labelId = `enhanced-table-checkbox-${index}`
 
                 return (
                   <TableRow
                     hover
-                    onClick={(event) => handleClick(event, row.name)}
-                    role="checkbox"
-                    aria-checked={isItemSelected}
                     tabIndex={-1}
                     key={row.name}
-                    selected={isItemSelected}
                     sx={{ cursor: 'pointer' }}
                   >
                     <TableCell
@@ -306,6 +282,7 @@ export default function SortTable() {
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
+          labelRowsPerPage="Linhas por página:"
         />
         <FormControlLabel
           sx={{ ml: 1 }}
