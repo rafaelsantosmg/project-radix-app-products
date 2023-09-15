@@ -22,24 +22,45 @@ export default function Form() {
     description: '',
     category: '',
     price: '',
-    errors: {
+  })
+  const [errors, setErrors] = useState({
+    name: '',
+    description: '',
+    category: '',
+    price: '',
+  })
+  const [createProduct] = useMutation(CREATE_PRODUCT)
+
+  const resetFields = () => {
+    setValues({
       name: '',
       description: '',
       category: '',
       price: '',
-    },
-  })
-  const [createProduct] = useMutation(CREATE_PRODUCT)
+    })
+  }
 
-  const validateValues = () => {
-    const errors = Object.values(values.errors).filter((error) => error !== '')
-    if (errors.length === 0) {
-      return true
-    }
-    return false
+  const resetErrors = () => {
+    setErrors({
+      name: '',
+      description: '',
+      category: '',
+      price: '',
+    })
+  }
+
+  const validateEmptyValues = (): boolean => {
+    return Object.values(values).some((value) => value === '')
+  }
+
+  const validateErrors = (): boolean => {
+    return Object.values(errors).some((error) => error !== '')
   }
 
   function validatePrice(numeroStr: string): boolean | undefined {
+    if (numeroStr === '') {
+      return true
+    }
     try {
       const numero = parseFloat(numeroStr.replace(',', '.'))
       if (!isNaN(numero)) {
@@ -52,12 +73,6 @@ export default function Form() {
 
   const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault()
-    if (!validateValues()) {
-      return alert('Preencha todos os campos para continuar.')
-    }
-    if (!validatePrice(values.price)) {
-      return alert('O preço deve ser maior que 0.')
-    }
     try {
       await createProduct({
         variables: {
@@ -73,60 +88,52 @@ export default function Form() {
     } catch (error) {
       alert('Erro ao cadastrar produto.' + error)
     } finally {
-      setValues({
-        name: '',
-        description: '',
-        category: '',
-        price: '',
-        errors: {
-          name: '',
-          description: '',
-          category: '',
-          price: '',
-        },
-      })
+      resetFields()
+      resetErrors()
     }
   }
 
   const handleCancel = () => {
-    setValues({
-      name: '',
-      description: '',
-      category: '',
-      price: '',
-      errors: {
-        name: '',
-        description: '',
-        category: '',
-        price: '',
-      },
-    })
     router.push('/home', { scroll: false })
+    resetFields()
+    resetErrors()
   }
 
   const handleChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    setValues({
-      ...values,
-      [target.name]: target.value,
-    })
+    if (target.name === 'price') {
+      if (!validatePrice(target.value)) {
+        setErrors({
+          ...errors,
+          [target.name]: 'Insira um preço válido',
+        })
+      } else {
+        setErrors({
+          ...errors,
+          [target.name]: '',
+        })
+        setValues({
+          ...values,
+          [target.name]: target.value,
+        })
+      }
+    } else {
+      setValues({
+        ...values,
+        [target.name]: target.value,
+      })
+    }
   }
 
   const handleBlur = ({ target }: ChangeEvent<HTMLInputElement>) => {
     if (target.value === '') {
-      setValues({
-        ...values,
-        errors: {
-          ...values.errors,
-          [target.name]: 'Campo obrigatório',
-        },
+      setErrors({
+        ...errors,
+        [target.name]: 'Campo obrigatório',
       })
     } else {
-      setValues({
-        ...values,
-        errors: {
-          ...values.errors,
-          [target.name]: '',
-        },
+      setErrors({
+        ...errors,
+        [target.name]: '',
       })
     }
   }
@@ -143,8 +150,8 @@ export default function Form() {
         width: '100%',
       }}
     >
-      <Grid container xl={8} lg={10} md={8} sm={8} xs={10} spacing={2}>
-        <Grid item xs={12}>
+      <Grid container xl={10} lg={8} md={8} sm={8} xs={10} rowGap={2}>
+        <Grid item xs={12} sx={{ mt: 1, mb: 1 }}>
           <Typography variant="h4">Cadastro de Produtos</Typography>
         </Grid>
         <Grid item xs={12}>
@@ -155,9 +162,7 @@ export default function Form() {
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          {values.errors.name && (
-            <Typography sx={style.p}>{values.errors.name}</Typography>
-          )}
+          {errors.name && <Typography sx={style.p}>{errors.name}</Typography>}
         </Grid>
         <Grid item xs={12}>
           <TextFields
@@ -167,8 +172,8 @@ export default function Form() {
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          {values.errors.description && (
-            <Typography sx={style.p}>{values.errors.description}</Typography>
+          {errors.description && (
+            <Typography sx={style.p}>{errors.description}</Typography>
           )}
         </Grid>
         <Grid item xs={12}>
@@ -179,8 +184,8 @@ export default function Form() {
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          {values.errors.category && (
-            <Typography sx={style.p}>{values.errors.category}</Typography>
+          {errors.category && (
+            <Typography sx={style.p}>{errors.category}</Typography>
           )}
         </Grid>
         <Grid item xs={12}>
@@ -191,27 +196,30 @@ export default function Form() {
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          {values.errors.price && (
-            <Typography sx={style.p}>{values.errors.price}</Typography>
-          )}
+          {errors.price && <Typography sx={style.p}>{errors.price}</Typography>}
         </Grid>
       </Grid>
       <Grid
         container
-        xl={8}
-        lg={10}
+        xl={10}
+        lg={8}
         md={8}
         sm={8}
         xs={10}
         sx={{ mt: 4 }}
-        justifyContent="space-between"
+        justifyContent="flex-end"
       >
         <Grid>
-          <Button variant="contained" color="success" type="submit">
+          <Button
+            variant="contained"
+            color="success"
+            type="submit"
+            disabled={validateErrors() || validateEmptyValues()}
+          >
             Cadastrar
           </Button>
         </Grid>
-        <Grid>
+        <Grid sx={{ ml: 5 }}>
           <Button
             variant="contained"
             color="error"
