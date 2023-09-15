@@ -11,9 +11,10 @@ export const styleHome = {
   },
   mainWrapper: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(2, 1fr)',
+    gridTemplateColumns: 'repeat(3, 1fr)',
     gap: 1,
     gridTemplateRows: 'auto',
-    gridTemplateAreas: `"header header header header" "table table table table"`,
+    gridTemplateAreas: `"header header header header" 
+    "search search search search" "table table table table"`,
   },
 }
