@@ -1,10 +1,18 @@
 import { useMutation } from '@apollo/client'
-import { Button, Grid, Typography } from '@mui/material'
+import {
+  Button,
+  Checkbox,
+  FormControlLabel,
+  Grid,
+  SelectChangeEvent,
+  Typography,
+} from '@mui/material'
 import { useRouter } from 'next/navigation'
 import { ChangeEvent, useContext, useState } from 'react'
 import { CREATE_PRODUCT, GET_PRODUCTS } from '../../graphql/productQuery'
 import { DataContext } from '../../providers/DataProvider'
 import theme from '../../theme'
+import SelectTextFields from '../Inputs/SelectFields'
 import TextFields from '../Inputs/TextFields'
 
 const style = {
@@ -16,7 +24,7 @@ const style = {
 
 export default function Form() {
   const router = useRouter()
-  const { products } = useContext(DataContext)
+  const { products, categories } = useContext(DataContext)
   const [values, setValues] = useState({
     name: '',
     description: '',
@@ -29,6 +37,8 @@ export default function Form() {
     category: '',
     price: '',
   })
+  const [selectedCategory, setSelectedCategory] = useState('')
+  const [newCategory, setNewCategory] = useState(false)
   const [createProduct] = useMutation(CREATE_PRODUCT)
 
   const resetFields = () => {
@@ -124,6 +134,10 @@ export default function Form() {
     }
   }
 
+  const handleChangeSelect = ({ target }: SelectChangeEvent<string>) => {
+    setSelectedCategory(target.value)
+  }
+
   const handleBlur = ({ target }: ChangeEvent<HTMLInputElement>) => {
     if (target.value === '') {
       setErrors({
@@ -177,13 +191,29 @@ export default function Form() {
           )}
         </Grid>
         <Grid item xs={12}>
-          <TextFields
-            label="Categoria"
-            name="category"
-            values={values.category}
-            onChange={handleChange}
-            onBlur={handleBlur}
+          <FormControlLabel
+            sx={{ mt: -2 }}
+            control={<Checkbox defaultChecked />}
+            label="Nova Categoria"
+            checked={newCategory}
+            onChange={() => setNewCategory(!newCategory)}
           />
+          {!newCategory ? (
+            <SelectTextFields
+              label="Selecione uma categoria"
+              options={categories}
+              value={selectedCategory}
+              onChange={handleChangeSelect}
+            />
+          ) : (
+            <TextFields
+              label="Insira uma nova categoria"
+              name="category"
+              values={values.category}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          )}
           {errors.category && (
             <Typography sx={style.p}>{errors.category}</Typography>
           )}
