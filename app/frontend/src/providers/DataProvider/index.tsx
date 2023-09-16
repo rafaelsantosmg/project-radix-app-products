@@ -7,6 +7,7 @@ export const DataContext = createContext<DataContextT>({} as DataContextT)
 export const DataProvider = ({ children }: providerProps) => {
   const [products, setProducts] = useState([])
   const [searchProducts, setSearchProducts] = useState([])
+  const [categories, setCategories] = useState([])
 
   return (
     <DataContext.Provider
@@ -15,6 +16,8 @@ export const DataProvider = ({ children }: providerProps) => {
         setProducts,
         searchProducts,
         setSearchProducts,
+        categories,
+        setCategories,
       }}
     >
       {children}

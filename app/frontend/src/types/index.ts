@@ -5,6 +5,8 @@ export type DataContextT = {
   setProducts: (products: any) => void
   searchProducts: any
   setSearchProducts: (searchProducts: any) => void
+  categories: any
+  setCategories: (categories: any) => void
 }
 
 export type providerProps = {
