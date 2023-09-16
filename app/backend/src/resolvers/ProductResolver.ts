@@ -25,7 +25,7 @@ export class ProductResolver {
   ) {
     this.data = await loadDataFromFile()
     const findProduct = this.data.find(
-      (product: Product) => product.id === id || product.name === name
+      (product: Product) => product.name === name
     )
     if (findProduct) {
       throw new Error('Product already exists')
