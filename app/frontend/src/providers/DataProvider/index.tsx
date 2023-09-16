@@ -1,13 +1,14 @@
 import React, { useState, createContext, use, useEffect } from 'react'
 
-import { DataContextT, providerProps } from '../../types'
+import { TDataContext, TProviderProps } from '../../types'
+import { Product } from '../../interfaces/Products'
 
-export const DataContext = createContext<DataContextT>({} as DataContextT)
+export const DataContext = createContext<TDataContext>({} as TDataContext)
 
-export const DataProvider = ({ children }: providerProps) => {
-  const [products, setProducts] = useState([])
-  const [searchProducts, setSearchProducts] = useState([])
-  const [categories, setCategories] = useState([])
+export const DataProvider = ({ children }: TProviderProps) => {
+  const [products, setProducts] = useState<Product[]>([])
+  const [searchProducts, setSearchProducts] = useState<Product[]>([])
+  const [categories, setCategories] = useState<string[]>([])
 
   return (
     <DataContext.Provider

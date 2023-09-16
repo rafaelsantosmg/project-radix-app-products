@@ -1,14 +1,29 @@
+import { Product } from '../interfaces/Products'
+
 export type Order = 'asc' | 'desc'
 
-export type DataContextT = {
-  products: any
-  setProducts: (products: any) => void
-  searchProducts: any
-  setSearchProducts: (searchProducts: any) => void
-  categories: any
-  setCategories: (categories: any) => void
+export type TDataContext = {
+  products: Product[]
+  setProducts: (products: Product[]) => void
+  searchProducts: Product[]
+  setSearchProducts: (searchProducts: Product[]) => void
+  categories: string[]
+  setCategories: (categories: string[]) => void
 }
 
-export type providerProps = {
+export type TProviderProps = {
   children: React.ReactNode
+}
+
+export type TFormValues = {
+  name: string
+  description: string
+  price: string
+}
+
+export type TFormErrors = {
+  name?: string
+  description?: string
+  category?: string
+  price?: string
 }
