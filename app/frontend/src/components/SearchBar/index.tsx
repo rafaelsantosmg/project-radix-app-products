@@ -1,13 +1,14 @@
-import { Box, Grid } from '@mui/material'
-import { ChangeEvent, use, useContext, useEffect, useState } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Box, Grid, SelectChangeEvent } from '@mui/material'
+import { ChangeEvent, useContext, useEffect, useState } from 'react'
 import { Product } from '../../interfaces/Products'
 import { DataContext } from '../../providers/DataProvider'
 import theme from '../../theme'
-import SelectTextFields from '../Inputs/SelectTextFields'
+import SelectTextFields from '../Inputs/SelectFields'
 import TextFields from '../Inputs/TextFields'
 
 export default function SearchBar() {
-  const { products, setSearchProducts } = useContext(DataContext)
+  const { products, setSearchProducts, setCategories } = useContext(DataContext)
   const [selectedCategory, setSelectedCategory] = useState('')
 
   const categories = products
@@ -19,14 +20,17 @@ export default function SearchBar() {
     }, [])
     .sort((a: string, b: string) => a.localeCompare(b))
 
-  const handleSelectCategory = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    const category = target.value
-    const filteredProducts = products.filter(
-      (product: Product) => product.category === category
-    )
-    setSelectedCategory(category)
+  useEffect(() => {
+    setCategories(categories)
+  }, [categories.length])
 
-    if (category === '') {
+  const handleSelectCategory = ({ target }: SelectChangeEvent<string>) => {
+    const filteredProducts = products.filter(
+      (product: Product) => product.category === target.value
+    )
+    setSelectedCategory(target.value)
+
+    if (target.value === '') {
       setSearchProducts(products)
     } else setSearchProducts(filteredProducts)
   }
@@ -88,9 +92,9 @@ export default function SearchBar() {
             <Grid item lg={4} md={6} sm={12} xs={12}>
               <SelectTextFields
                 label="Selecione uma categoria"
-                data={categories}
                 value={selectedCategory}
                 onChange={handleSelectCategory}
+                options={categories}
               />
             </Grid>
           </Grid>
