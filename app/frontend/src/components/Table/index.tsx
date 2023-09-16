@@ -13,7 +13,6 @@ import TableHead from '@mui/material/TableHead'
 import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
 import TableSortLabel from '@mui/material/TableSortLabel'
-import Typography from '@mui/material/Typography'
 import { visuallyHidden } from '@mui/utils'
 import { useRouter } from 'next/navigation'
 import {
@@ -29,6 +28,7 @@ import { Product } from '../../interfaces/Products'
 import { EnhancedTableProps, HeadCell } from '../../interfaces/Table'
 import { DataContext } from '../../providers/DataProvider'
 import { Order } from '../../types'
+import LoaderSpinner from '../LoaderSpinner'
 
 function createData(
   id: number,
@@ -152,17 +152,21 @@ export default function SortTable() {
     useContext(DataContext)
   const [order, setOrder] = useState<Order>('asc')
   const [orderBy, setOrderBy] = useState<keyof Product>('category')
-  const [page, setPage] = useState(0)
-  const [dense, setDense] = useState(false)
-  const [rowsPerPage, setRowsPerPage] = useState(5)
+  const [page, setPage] = useState<number>(0)
+  const [dense, setDense] = useState<boolean>(false)
+  const [rowsPerPage, setRowsPerPage] = useState<number>(5)
+  const [loading, setLoading] = useState<boolean>(true)
 
-  const { data, loading } = useQuery<{ products: Product[] }>(GET_PRODUCTS)
+  const { data } = useQuery<{ products: Product[] }>(GET_PRODUCTS)
 
   useEffect(() => {
-    if (data) {
-      setProducts(data.products)
-      setSearchProducts(data.products)
-    }
+    setTimeout(() => {
+      if (data) {
+        setProducts(data.products)
+        setSearchProducts(data.products)
+      }
+      setLoading(false)
+    }, 1000)
   }, [data])
 
   const rows = searchProducts.map((product: Product) =>
@@ -210,7 +214,7 @@ export default function SortTable() {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0
 
   return loading ? (
-    <Typography>Carregando...</Typography>
+    <LoaderSpinner />
   ) : (
     <Box
       sx={{
