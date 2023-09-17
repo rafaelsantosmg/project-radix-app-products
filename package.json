@@ -3,9 +3,15 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "install:apps": "./apps_install.sh"
+    "install:apps": "./apps_install.sh",
+    "start": "concurrently \"yarn run backend\" \"yarn run frontend\"",
+    "backend": "cd ./app/backend && yarn run dev",
+    "frontend": "cd ./app/frontend && yarn dev"
   },
   "repository": "git@github.com:rafaelsantosmg/project-radix-app-products.git",
   "author": "Rafael Alonso <rafaelalonsobarbosa@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.1"
+  }
 }
