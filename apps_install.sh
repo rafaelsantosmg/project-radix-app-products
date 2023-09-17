@@ -1,4 +1,5 @@
 #!/bin/bash
+yarn
 
 printf "\n> Instalando o front-end\n"
 cd ./app/frontend
@@ -9,6 +10,6 @@ cd ./app/backend
 yarn install
 
 printf "\n> Iniciando Projeto\n"
-cd ..
+cd ../../
 yarn start
 
