@@ -18,6 +18,7 @@ export type TProviderProps = {
 export type TFormValues = {
   name: string
   description: string
+  category: string
   price: string
 }
 

@@ -30,6 +30,7 @@ export default function Form() {
   const [values, setValues] = useState<TFormValues>({
     name: '',
     description: '',
+    category: '',
     price: '',
   })
   const [errors, setErrors] = useState<TFormErrors>({
@@ -38,7 +39,6 @@ export default function Form() {
     category: '',
     price: '',
   })
-  const [category, setCategory] = useState<string>('')
   const [newCategory, setNewCategory] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
   const [createProduct] = useMutation(CREATE_PRODUCT)
@@ -47,6 +47,7 @@ export default function Form() {
     setValues({
       name: '',
       description: '',
+      category: '',
       price: '',
     })
   }
@@ -60,13 +61,15 @@ export default function Form() {
     })
   }
 
-  const validateEmptyValues = (): boolean => {
-    return Object.values(values).some((value) => value === '')
-  }
+  const validateResetFields = Object.values(values).some(
+    (value) => value !== ''
+  )
 
-  const validateErrors = (): boolean => {
-    return Object.values(errors).some((error) => error !== '')
-  }
+  const validateEmptyValues = Object.values(values).some(
+    (value) => value === ''
+  )
+
+  const validateErrors = Object.values(errors).some((error) => error !== '')
 
   const validatePrice = (numeroStr: string): boolean | undefined => {
     if (numeroStr === '') {
@@ -93,7 +96,7 @@ export default function Form() {
           id: String(products.length + 1).trim(),
           name: values.name.trim(),
           description: values.description.trim(),
-          category: category.trim(),
+          category: values.category.trim(),
           price: Number(values.price.replace(',', '.').trim()),
         },
         refetchQueries: [GET_PRODUCTS],
@@ -113,9 +116,12 @@ export default function Form() {
   }
 
   const handleCancel = (): void => {
-    resetFields()
-    resetErrors()
-    router.push('/home', { scroll: false })
+    if (validateResetFields) {
+      resetFields()
+      resetErrors()
+    } else {
+      router.push('/home', { scroll: false })
+    }
   }
 
   const handleChange = ({ target }: ChangeEvent<HTMLInputElement>): void => {
@@ -146,7 +152,10 @@ export default function Form() {
   const handleChangeCategory = ({
     target,
   }: SelectChangeEvent<string>): void => {
-    setCategory(target.value)
+    setValues({
+      ...values,
+      category: target.value,
+    })
     if (target.value !== '') {
       setErrors({
         ...errors,
@@ -238,21 +247,24 @@ export default function Form() {
                 checked={newCategory}
                 onChange={() => {
                   setNewCategory(!newCategory)
-                  setCategory('')
+                  setValues({
+                    ...values,
+                    category: '',
+                  })
                 }}
               />
               {!newCategory ? (
                 <SelectTextFields
                   label="Selecione uma categoria"
                   options={categories}
-                  value={category}
+                  value={values.category}
                   onChange={handleChangeCategory}
                 />
               ) : (
                 <TextFields
                   label="Insira uma nova categoria"
                   name="category"
-                  values={category}
+                  values={values.category}
                   onChange={handleChangeCategory}
                   onBlur={handleBlur}
                 />
@@ -316,7 +328,7 @@ export default function Form() {
               variant="contained"
               color="success"
               type="submit"
-              disabled={validateErrors() || validateEmptyValues()}
+              disabled={validateErrors || validateEmptyValues}
             >
               Cadastrar
             </Button>
@@ -327,7 +339,7 @@ export default function Form() {
               type="button"
               onClick={handleCancel}
             >
-              Cancelar
+              {validateResetFields ? 'Limpar Campos' : 'Cancelar'}
             </Button>
           </Grid>
         </>
