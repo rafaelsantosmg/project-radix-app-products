@@ -69,5 +69,12 @@ yarn run install:apps
 
 ```bash
 cd app/backend
-yarn run test
+yarn test
+```
+
+# Rodando Testes do frontend:
+
+```bash
+cd app/frontend
+yarn test
 ```
