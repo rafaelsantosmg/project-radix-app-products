@@ -191,7 +191,19 @@ export default function Form() {
       ) : (
         <>
           <Grid container md={8} xs={10} rowGap={2}>
-            <Grid item xs={12} sx={{ mt: 1, mb: 1 }}>
+            <Grid
+              item
+              xs={12}
+              sx={{
+                mb: 1,
+                mt: 1,
+                '@media (max-width: 600px)': {
+                  '& h4': {
+                    fontSize: '1.3rem',
+                  },
+                },
+              }}
+            >
               <Typography variant="h4">Cadastro de Produtos</Typography>
             </Grid>
             <Grid item xs={12}>
