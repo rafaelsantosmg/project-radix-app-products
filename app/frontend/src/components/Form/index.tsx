@@ -113,9 +113,9 @@ export default function Form() {
   }
 
   const handleCancel = (): void => {
-    router.push('/home', { scroll: false })
     resetFields()
     resetErrors()
+    router.push('/home', { scroll: false })
   }
 
   const handleChange = ({ target }: ChangeEvent<HTMLInputElement>): void => {
