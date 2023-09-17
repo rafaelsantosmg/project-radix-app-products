@@ -226,7 +226,7 @@ export default function SortTable() {
         width: '100%',
       }}
     >
-      <Grid container xl={10} lg={8} md={8} sm={8} xs={10}>
+      <Grid container md={8} xs={10}>
         <Paper sx={{ width: '100%', mb: 2 }}>
           <TableContainer>
             <Table

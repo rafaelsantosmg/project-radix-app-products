@@ -190,7 +190,7 @@ export default function Form() {
         <LoaderSpinner />
       ) : (
         <>
-          <Grid container xl={10} lg={8} md={8} sm={8} xs={10} rowGap={2}>
+          <Grid container md={8} xs={10} rowGap={2}>
             <Grid item xs={12} sx={{ mt: 1, mb: 1 }}>
               <Typography variant="h4">Cadastro de Produtos</Typography>
             </Grid>
@@ -264,34 +264,59 @@ export default function Form() {
           </Grid>
           <Grid
             container
-            xl={10}
-            lg={8}
             md={8}
-            sm={8}
             xs={10}
-            sx={{ mt: 4 }}
-            justifyContent="flex-end"
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              mt: 4,
+              width: '100%',
+              '& .MuiButton-root': {
+                '&:first-of-type': {
+                  mr: 2,
+                },
+                '&:last-of-type': {
+                  ml: 2,
+                },
+                fontSize: '1rem',
+                height: '2.5rem',
+                width: '30%',
+              },
+              '@media (max-width: 600px)': {
+                flexDirection: 'column',
+                '& .MuiButton-root': {
+                  '&:first-of-type': {
+                    mr: 0,
+                  },
+                  '&:last-of-type': {
+                    mt: 4,
+                    ml: 0,
+                  },
+                  fontSize: '1rem',
+                  height: '2.5rem',
+                  width: '100%',
+                },
+              },
+            }}
           >
-            <Grid>
-              <Button
-                variant="contained"
-                color="success"
-                type="submit"
-                disabled={validateErrors() || validateEmptyValues()}
-              >
-                Cadastrar
-              </Button>
-            </Grid>
-            <Grid sx={{ ml: 5 }}>
-              <Button
-                variant="contained"
-                color="error"
-                type="button"
-                onClick={handleCancel}
-              >
-                Cancelar
-              </Button>
-            </Grid>
+            <Button
+              variant="contained"
+              color="success"
+              type="submit"
+              disabled={validateErrors() || validateEmptyValues()}
+            >
+              Cadastrar
+            </Button>
+
+            <Button
+              variant="contained"
+              color="error"
+              type="button"
+              onClick={handleCancel}
+            >
+              Cancelar
+            </Button>
           </Grid>
         </>
       )}

@@ -69,10 +69,8 @@ export default function SearchBar() {
         container
         justifyContent="space-between"
         alignItems="center"
-        xl={10}
-        lg={8}
         md={8}
-        sm={8}
+        sm={10}
         xs={10}
       >
         <Box

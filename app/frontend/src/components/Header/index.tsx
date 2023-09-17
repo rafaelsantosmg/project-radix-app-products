@@ -7,23 +7,42 @@ function Header() {
   return (
     <Box
       sx={{
-        gridArea: 'header',
-        background: theme.gradientPurple,
-        height: '4rem',
-        display: 'flex',
         alignItems: 'center',
+        background: theme.gradientPurple,
+        display: 'flex',
+        gridArea: 'header',
+        height: '4rem',
         justifyContent: 'center',
+        '@media (max-width: 600px)': {
+          height: '6rem',
+        },
       }}
     >
       <Grid
         container
         justifyContent="space-between"
         alignItems="center"
-        xl={10}
-        lg={8}
         md={8}
-        sm={8}
         xs={10}
+        sx={{
+          '& img': {
+            border: '2px solid white',
+            borderRadius: '50%',
+          },
+          '& h5': {
+            fontWeight: 'bold',
+            textShadow: '1px 1px 1px black',
+          },
+          '@media (max-width: 600px)': {
+            flexDirection: 'column',
+            '& img': {
+              mb: 2,
+            },
+            h5: {
+              fontSize: '1.2rem',
+            },
+          },
+        }}
       >
         <Image
           src={background}

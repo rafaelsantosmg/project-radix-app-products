@@ -7,7 +7,7 @@ export default function SelectFields({ ...props }) {
   const { label, options, ...rest } = props
 
   return (
-    <FormControl sx={{ width: '100%' }}>
+    <FormControl variant="outlined" sx={{ width: '100%' }}>
       <InputLabel id="select-label">{label}</InputLabel>
       <Select
         sx={{
