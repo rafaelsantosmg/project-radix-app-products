@@ -4,7 +4,7 @@ import { FormControl, IconButton, InputLabel, Select } from '@mui/material'
 import MenuItem from '@mui/material/MenuItem'
 
 export default function SelectFields({ ...props }) {
-  const { label, options } = props
+  const { label, options, ...rest } = props
 
   return (
     <FormControl sx={{ width: '100%' }}>
@@ -26,7 +26,7 @@ export default function SelectFields({ ...props }) {
             </IconButton>
           )
         }
-        {...props}
+        {...rest}
       >
         {options.map((option: string) => (
           <MenuItem key={option} value={option}>

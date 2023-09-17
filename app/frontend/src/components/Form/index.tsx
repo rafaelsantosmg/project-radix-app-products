@@ -68,7 +68,7 @@ export default function Form() {
     return Object.values(errors).some((error) => error !== '')
   }
 
-  function validatePrice(numeroStr: string): boolean | undefined {
+  const validatePrice = (numeroStr: string): boolean | undefined => {
     if (numeroStr === '') {
       return true
     }
