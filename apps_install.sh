@@ -1,13 +1,15 @@
 #!/bin/bash
+printf "\n> Instalando as dependencias\n"
 yarn
-
-printf "\n> Instalando o front-end\n"
-cd ./app/frontend
-yarn install 
 
 printf "\n> Instalando o back-end\n"
 cd ./app/backend
-yarn install
+yarn
+
+printf "\n> Instalando o front-end\n"
+cd ../frontend
+yarn
+
 
 printf "\n> Iniciando Projeto\n"
 cd ../../
