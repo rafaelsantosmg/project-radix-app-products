@@ -17,8 +17,10 @@ export default function SelectFields({
   value: string
   clearField: () => void
   onChange: ({ target }: SelectChangeEvent<string>) => void
+  onClose?: () => void
 }): JSX.Element {
-  const { label, options, value, clearField, onChange, ...rest } = props
+  const { label, options, value, clearField, onChange, onClose, ...rest } =
+    props
 
   return (
     <FormControl variant="outlined" sx={{ width: '100%' }}>
@@ -34,6 +36,7 @@ export default function SelectFields({
         id="select"
         labelId="select-label"
         onChange={onChange}
+        onClose={onClose}
         renderValue={(value: string) => (value ? value : label)}
         value={value}
         sx={{
