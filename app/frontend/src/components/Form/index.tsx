@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useMutation } from '@apollo/client'
 import {
   Button,
@@ -8,7 +9,7 @@ import {
   Typography,
 } from '@mui/material'
 import { useRouter } from 'next/navigation'
-import { ChangeEvent, useContext, useState } from 'react'
+import { ChangeEvent, useContext, useEffect, useState } from 'react'
 import { CREATE_PRODUCT, GET_PRODUCTS } from '../../graphql/productQuery'
 import { DataContext } from '../../providers/DataProvider'
 import theme from '../../theme'
@@ -41,7 +42,26 @@ export default function Form(): JSX.Element {
   })
   const [newCategory, setNewCategory] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
+  const [firstRender, setFirstRender] = useState<boolean>(true)
   const [createProduct] = useMutation(CREATE_PRODUCT)
+
+  useEffect(() => {
+    if (!firstRender) {
+      if (values.category === '') {
+        setErrors({
+          ...errors,
+          category: 'Campo obrigatório',
+        })
+      } else {
+        setErrors({
+          ...errors,
+          category: '',
+        })
+      }
+    } else {
+      setFirstRender(false)
+    }
+  }, [values])
 
   const resetFields = (): void => {
     setValues({
@@ -104,7 +124,7 @@ export default function Form(): JSX.Element {
       })
       setTimeout(() => {
         router.push('/home', { scroll: false })
-      }, 900)
+      }, 800)
     } catch (error) {
       alert('Erro ao cadastrar produto! ' + error)
     } finally {
@@ -132,14 +152,14 @@ export default function Form(): JSX.Element {
           ...errors,
           [target.name]: 'Insira um preço válido',
         })
+        setValues({
+          ...values,
+          [target.name]: target.value,
+        })
       } else {
         setErrors({
           ...errors,
           [target.name]: '',
-        })
-        setValues({
-          ...values,
-          [target.name]: target.value,
         })
       }
     } else {
@@ -181,8 +201,32 @@ export default function Form(): JSX.Element {
     })
   }
 
+  const handleClose = (): void => {
+    if (values.category === '') {
+      setValues((prevState) => ({
+        ...prevState,
+      }))
+    }
+  }
+
   const handleBlur = ({ target }: ChangeEvent<HTMLInputElement>): void => {
-    if (target.value === '') {
+    if (target.name === 'price') {
+      if (!validatePrice(target.value)) {
+        setErrors({
+          ...errors,
+          [target.name]: 'Insira um preço válido',
+        })
+      } else {
+        setErrors({
+          ...errors,
+          [target.name]: '',
+        })
+        setValues({
+          ...values,
+          [target.name]: target.value,
+        })
+      }
+    } else if (target.value === '') {
       setErrors({
         ...errors,
         [target.name]: 'Campo obrigatório',
@@ -277,6 +321,7 @@ export default function Form(): JSX.Element {
                   onChange={handleChangeCategory}
                   options={categories}
                   value={values.category}
+                  onClose={handleClose}
                 />
               ) : (
                 <TextFields
