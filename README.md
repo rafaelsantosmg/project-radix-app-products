@@ -64,6 +64,13 @@ yarn run install:apps
 
 ### Após a inicialização do script, acesse [APP PRODUCTS](http://localhost:3000/).
 
+Obs: O backend roda na porta 4000 e o frontend na porta 3000.
+
+Se precisar iniciar o projeto novamente, utilize o comando abaixo na raiz do projeto:
+
+```bash
+yarn start
+```
 
 # Rodando Testes do backend:
 
