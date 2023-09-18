@@ -1,7 +1,7 @@
 import { CircularProgress } from '@mui/material'
 import Stack from '@mui/material/Stack'
 
-export default function LoaderSpinner() {
+export default function LoaderSpinner(): JSX.Element {
   return (
     <Stack
       sx={{

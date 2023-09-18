@@ -40,7 +40,20 @@ function createData(
   return { id, name, description, category, price }
 }
 
-function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
+function orderByStringOfNumber<T>(a: T, b: T, orderBy: keyof T): number {
+  if (Number(b[orderBy]) < Number(a[orderBy])) {
+    return -1
+  }
+  if (Number(b[orderBy]) > Number(a[orderBy])) {
+    return 1
+  }
+  return 0
+}
+
+function descendingComparator<T>(a: T, b: T, orderBy: keyof T): number {
+  if (orderBy === 'id') {
+    return orderByStringOfNumber(a, b, orderBy)
+  }
   if (b[orderBy] < a[orderBy]) {
     return -1
   }
@@ -50,7 +63,7 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   return 0
 }
 
-function getComparator<Key extends keyof any>(
+function getComparator<Key extends keyof number | string>(
   order: Order,
   orderBy: Key
 ): (
@@ -146,7 +159,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
   )
 }
 
-export default function SortTable() {
+export default function SortTable(): JSX.Element {
   const router = useRouter()
   const { setProducts, searchProducts, setSearchProducts } =
     useContext(DataContext)

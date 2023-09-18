@@ -3,7 +3,7 @@ import Header from '../components/Header'
 import SearchBar from '../components/SearchBar'
 import SortTable from '../components/Table'
 
-export default function Home() {
+export default function Home(): JSX.Element {
   return (
     <Box
       sx={{

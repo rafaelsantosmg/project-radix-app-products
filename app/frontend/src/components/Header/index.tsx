@@ -3,7 +3,7 @@ import Image from 'next/image'
 import background from '../../asset/images/radix-background.jpg'
 import theme from '../../theme'
 
-function Header() {
+function Header(): JSX.Element {
   return (
     <Box
       sx={{
@@ -27,7 +27,7 @@ function Header() {
         sx={{
           '& img': {
             border: '2px solid white',
-            borderRadius: '50%',
+            borderRadius: '1rem',
           },
           '& h5': {
             fontWeight: 'bold',
@@ -51,7 +51,7 @@ function Header() {
           alt="Picture of the author"
         />
         <Typography variant="h5" align="center" sx={{ color: theme.white }}>
-          APP de Produtos RADIX
+          Soluções em Tecnologia
         </Typography>
       </Grid>
     </Box>

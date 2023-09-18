@@ -7,7 +7,7 @@ import theme from '../../theme'
 import SelectTextFields from '../Inputs/SelectFields'
 import TextFields from '../Inputs/TextFields'
 
-export default function SearchBar() {
+export default function SearchBar(): JSX.Element {
   const { products, setSearchProducts, setCategories } = useContext(DataContext)
   const [selectedCategory, setSelectedCategory] = useState('')
 
@@ -89,10 +89,11 @@ export default function SearchBar() {
             </Grid>
             <Grid item lg={4} md={6} sm={12} xs={12}>
               <SelectTextFields
+                clearField={() => setSelectedCategory('')}
                 label="Selecione uma categoria"
-                value={selectedCategory}
                 onChange={handleSelectCategory}
                 options={categories}
+                value={selectedCategory}
               />
             </Grid>
           </Grid>

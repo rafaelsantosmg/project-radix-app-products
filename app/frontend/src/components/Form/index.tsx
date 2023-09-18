@@ -24,7 +24,7 @@ const style = {
   },
 }
 
-export default function Form() {
+export default function Form(): JSX.Element {
   const router = useRouter()
   const { products, categories } = useContext(DataContext)
   const [values, setValues] = useState<TFormValues>({
@@ -50,6 +50,7 @@ export default function Form() {
       category: '',
       price: '',
     })
+    setNewCategory(false)
   }
 
   const resetErrors = (): void => {
@@ -169,6 +170,17 @@ export default function Form() {
     }
   }
 
+  const handleClearField = (): void => {
+    setValues({
+      ...values,
+      category: '',
+    })
+    setErrors({
+      ...errors,
+      category: 'Campo obrigatório',
+    })
+  }
+
   const handleBlur = ({ target }: ChangeEvent<HTMLInputElement>): void => {
     if (target.value === '') {
       setErrors({
@@ -206,14 +218,19 @@ export default function Form() {
               sx={{
                 mb: 1,
                 mt: 1,
-                '@media (max-width: 600px)': {
-                  '& h4': {
-                    fontSize: '1.3rem',
-                  },
-                },
               }}
             >
-              <Typography variant="h4">Cadastro de Produtos</Typography>
+              <Typography
+                variant="h4"
+                sx={{
+                  color: theme.black,
+                  '@media (max-width: 600px)': {
+                    fontSize: '1.3rem',
+                  },
+                }}
+              >
+                Cadastro de Produtos
+              </Typography>
             </Grid>
             <Grid item xs={12}>
               <TextFields
@@ -255,10 +272,11 @@ export default function Form() {
               />
               {!newCategory ? (
                 <SelectTextFields
+                  clearField={handleClearField}
                   label="Selecione uma categoria"
+                  onChange={handleChangeCategory}
                   options={categories}
                   value={values.category}
-                  onChange={handleChangeCategory}
                 />
               ) : (
                 <TextFields
